@@ -42,6 +42,10 @@ gem 'spring',        group: :development
 gem "thin"
 gem "turn", group: "test"
 gem "mocha", group: "test", require: "mocha/setup"
+
+# NOTE: Kaminari has to be loaded before Elasticsearch::Model so the callbacks are executed
+gem 'kaminari'
+
 gem "elasticsearch", git: "git://github.com/elasticsearch/elasticsearch-ruby.git"
 gem "elasticsearch-model", git: "git://github.com/elasticsearch/elasticsearch-rails.git"
 gem "elasticsearch-rails", git: "git://github.com/elasticsearch/elasticsearch-rails.git"
