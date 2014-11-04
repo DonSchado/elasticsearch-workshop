@@ -14,6 +14,14 @@ class ArticlesController < ApplicationController
     render action: "index"
   end
 
+  # GET /articles/search
+  def search
+    @articles = Article.search(params[:q]).records
+
+    render action: "index"
+  end
+
+
 
   # GET /articles/1
   # GET /articles/1.json
