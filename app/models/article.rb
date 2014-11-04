@@ -5,7 +5,6 @@ class Article < ActiveRecord::Base
   has_many                :authors, through: :authorships
   has_many                :comments
 
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
-  
+
+  include Searchable
 end
