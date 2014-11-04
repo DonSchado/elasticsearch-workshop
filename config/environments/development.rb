@@ -7,6 +7,7 @@ Rails.application.configure do
                           proc { |obj, nest_level, _| ' '*obj.to_s.size + '  '*(nest_level+1)  + '| ' } ]
   end
   
+
   config.assets.logger = false
   # Settings specified here will take precedence over those in config/application.rb.
 
