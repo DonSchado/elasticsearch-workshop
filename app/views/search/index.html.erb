@@ -140,6 +140,7 @@
           <small>Authors: <%= article.authors.map(&:full_name).to_sentence %></small> |
           <small>Published: <%= article.published_on %></small> |
           <small>Score: <%= article._score %></small>
+          <small><%= link_to 'show', article_path(article.id) %></small>
         </p>
       </div>
     <% end %>

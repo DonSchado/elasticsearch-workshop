@@ -1,5 +1,6 @@
 require 'zlib'
 require 'yaml'
+require 'sidekiq/api'
 
 Zlib::GzipReader.open(File.expand_path('../articles.yml.gz', __FILE__)) do |gzip|
   puts "Reading articles from gzipped YAML..."
