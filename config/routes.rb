@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :authorships
+
+  resources :authors
+
+  resources :categories
+
   root to: 'articles#index'
   resources :articles do
     collection { get :search }
