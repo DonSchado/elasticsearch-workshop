@@ -54,4 +54,8 @@ end
 
 # Remove any jobs from the "elasticsearch" Sidekiq queue
 #
-Sidekiq::Queue.new("elasticsearch").clear
+#Sidekiq::Queue.new("elasticsearch").clear
+
+Article.__elasticsearch__.create_index! force: true
+
+Article.import
