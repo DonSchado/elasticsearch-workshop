@@ -1,7 +1,17 @@
-# Pagination for [Twitter Bootstrap 2](http://getbootstrap.com/2.3.2/components.html#pagination)
+### Elasticsearch Example
 
-With support for:
+`rake db:create && rake db:migrate`
 
-- erb
-- haml
-- slim
+`rake db:seed` will generate about 1000 articles and index about 10000 documents
+
+---
+
+otherwise or in case of errors you can rebuild the index from the console:
+
+```
+  >> Article.__elasticsearch__.create_index!
+  => {"acknowledged"=>true}
+  >> Article.import
+  => 0
+  >>
+```
