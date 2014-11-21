@@ -18,7 +18,7 @@ class Indexer
       when /index|update/
         record = klass.constantize.find(record_id)
         record.__elasticsearch__.client = Client
-        record.__elasticsearch__.__send__ "#{operation}_document"
+        record.__elasticsearch__.index_document
       when /delete/
         Client.delete index: klass.constantize.index_name, type: klass.constantize.document_type, id: record_id
       else raise ArgumentError, "Unknown operation '#{operation}'"

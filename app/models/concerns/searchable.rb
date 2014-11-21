@@ -49,10 +49,10 @@ module Searchable
 
     # Set up callbacks for updating the index on model changes
     #
-    # after_commit lambda { Indexer.perform_async(:index,  self.class.to_s, self.id) }, on: :create
-    # after_commit lambda { Indexer.perform_async(:update, self.class.to_s, self.id) }, on: :update
-    # after_commit lambda { Indexer.perform_async(:delete, self.class.to_s, self.id) }, on: :destroy
-    # after_touch  lambda { Indexer.perform_async(:update, self.class.to_s, self.id) }
+    after_commit lambda { Indexer.perform_async(:index,  self.class.to_s, self.id) }, on: :create
+    after_commit lambda { Indexer.perform_async(:update, self.class.to_s, self.id) }, on: :update
+    after_commit lambda { Indexer.perform_async(:delete, self.class.to_s, self.id) }, on: :destroy
+    after_touch  lambda { Indexer.perform_async(:update, self.class.to_s, self.id) }
 
     # Customize the JSON serialization for Elasticsearch
     #
@@ -75,7 +75,6 @@ module Searchable
       # Prefill and set the filters (top-level `filter` and `facet_filter` elements)
       #
       __set_filters = lambda do |key, f|
-
         @search_definition[:filter][:and] ||= []
         @search_definition[:filter][:and]  |= [f]
 
@@ -124,11 +123,12 @@ module Searchable
       unless query.blank?
         @search_definition[:query] = {
           bool: {
-            should: [
-              { multi_match: {
+            must: [
+              { simple_query_string: {
                   query: query,
+                  analyzer: "snowball",
                   fields: ['title^10', 'abstract^2', 'content'],
-                  operator: 'and'
+                  default_operator: 'and'
                 }
               }
             ]

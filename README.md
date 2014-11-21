@@ -9,7 +9,7 @@
 otherwise or in case of errors you can rebuild the index from the console:
 
 ```
-  >> Article.__elasticsearch__.create_index!
+  >> Article.__elasticsearch__.create_index! force: true
   => {"acknowledged"=>true}
   >> Article.import
   => 0
